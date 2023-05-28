@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color:hsl(228, 33%, 97%);
+    font-family: 'Rubik', sans-serif;
+}
+.main_container{
+    max-width: 50vw;
+    min-height: 60vh;
+}
+h2{
+    color:grey;
+    font-size: 0.8rem;
+}
+h5, p{
+    font-size: 0.8rem;
+}
+img{
+    width: 2.5rem;
+}
+.comment_container, .reply_container, .new_comment{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    background-color:hsl(0, 0%, 100%) ;
+    border-radius: 0.5rem;
+}
+.reply_container{
+    width: 80%;
+    position: relative;
+    left: 10%;
+}
+.comment_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.user_info{
+    display: flex;
+    gap:1rem;
+    align-items: center;
+}
+.like_dislike{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: hsl(228, 33%, 97%);
+    border-radius: 10px;
+    padding: 10px 5px 10px 5px;
+    font-size: 0.8rem;
+}
+.answerbox, .answerbox_reply{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+    background-color: hsl(0, 0%, 100%);
+    padding: 20px;
+}
+.answerbox textarea{
+    width: 60%;
+    height: 3rem;
+}
+.answerbox_reply textarea{
+    width: 40%;
+    height: 3rem;
+}
+.options{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+button{
+    border: none;
+    background-color: inherit;
+}
+.new_comment textarea{
+    width: 70%;
+    height: 4rem;
+}
+.user_info p{
+    color: gray;
+}
+h5{
+    color: hsl(238, 40%, 52%)
+}
+.reply_comment button, .options button{
+    color: hsl(238, 40%, 52%)
+}
+.delete{
+    color: red !important;
+}
+button{
+    color :hsl(238, 40%, 52%)
+}
+.boxes{
+    background-color: hsl(238, 40%, 52%);
+    color:hsl(0, 0%, 100%) !important;
+    padding: 0.8rem;
+    font-size: 1.1rem;
+    border-radius: 10px;
+}
+span{
+    color: hsl(238, 40%, 52%)
+}
+button:hover{
+    opacity: 0.4;
+}
+.current_user{
+    background-color :hsl(238, 40%, 52%);
+    padding: 4px;
+    border-radius: 5px;
+    color:hsl(0, 0%, 100%) !important
+}
