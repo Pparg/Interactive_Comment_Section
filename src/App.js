@@ -3,6 +3,7 @@ import './App.css';
 import {Comment} from "./Component/Comment"
 import file from "./data.json"
 import { useState } from 'react';
+ let hello = "Hello"
 
 export function CommentSection( ) {
   let [data, setData] = useState(file);
