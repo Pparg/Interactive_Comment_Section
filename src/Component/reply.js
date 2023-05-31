@@ -24,14 +24,14 @@ export function Reply({info, current, deleteComment,id, handleReply,parentId, ha
                         {info.user.username === current.username? 
                         <div className="current_option">
                             <button className="delete" onClick={()=> deleteComment(id, true)}><i className="fa-solid fa-trash"></i> Delete</button>
-                            <button onClick={()=>{setEdit(!edit); setReplyTo(info.content)}}><i className="fa-solid fa-pen"></i> Edit</button>
+                            <button className="reply_box" onClick={()=>{setEdit(!edit); setReplyTo(info.content)}}><i className="fa-solid fa-pen"></i> Edit</button>
                         </div>
                         :
-                        <button onClick={()=> setClicked(true)}><i className="fa-solid fa-reply"></i> Reply</button>}  
+                        <button className="reply_box" onClick={()=> setClicked(true)}><i className="fa-solid fa-reply"></i> Reply</button>}  
                     </div>    
                 </div>
                 <div className="comment_section">
-                    {edit? <div className="update"><textarea value={ReplyTo} onChange={(e)=> setReplyTo(e.target.value)}></textarea><button onClick={()=>{handleEdit(id, ReplyTo, true); setEdit(false)}}>Update</button></div>: <h2><span>@{info.replyingTo}</span> {info.content}</h2>}
+                    {edit? <div className="update"><textarea value={ReplyTo} onChange={(e)=> setReplyTo(e.target.value)}></textarea><button className="boxes" onClick={()=>{handleEdit(id, ReplyTo, true); setEdit(false)}}>Update</button></div>: <h2><span>@{info.replyingTo}</span> {info.content}</h2>}
                 </div>  
             </div>
         </section>
@@ -39,9 +39,7 @@ export function Reply({info, current, deleteComment,id, handleReply,parentId, ha
         <div className="answerbox_reply">
             <img className="usersimg" alt="img" src={current.image.png}></img>
             <textarea value={ReplyTo} onChange={(e)=> setReplyTo(e.target.value)}></textarea>
-            <div className="options">
-                <button className="boxes" onClick={()=> {handleReply(parentId,ReplyTo); setClicked(!clicked); setReplyTo("")}}>Reply</button>
-            </div>
+            <button className="boxes" onClick={()=> {handleReply(parentId,ReplyTo); setClicked(!clicked); setReplyTo("")}}>Reply</button>
         </div>:""}
         </>
     )

@@ -25,24 +25,22 @@ export function Comment({data_comment, user, handleReply, id, deleteComment, han
                         {data_comment.user.username === user.username? 
                         <div className="current_option">
                             <button className="delete" onClick={()=> deleteComment(id)}><i className="fa-solid fa-trash"></i> Delete</button>
-                            <button onClick={()=> {setEdit(!edit); setReply(data_comment.content)}}><i className="fa-solid fa-pen"></i> Edit</button>
+                            <button className="reply_box" onClick={()=> {setEdit(!edit); setReply(data_comment.content)}}><i className="fa-solid fa-pen"></i> Edit</button>
                         </div>
                         :
-                        <button onClick={()=> setClicked(true)}><i className="fa-solid fa-reply"></i> Reply</button>}
+                        <button className="reply_box" onClick={()=> setClicked(true)}><i className="fa-solid fa-reply"></i> Reply</button>}
                     </div>    
                 </div>
                 <div className="comment_section">
-                    {edit?<div className="update"><textarea value={reply} onChange={(e)=> setReply(e.target.value)}></textarea><button onClick={()=> {handleEdit(id,reply); setEdit(false)}}>Update</button></div> :<h2>{data_comment.content}</h2>}
+                    {edit?<div className="update"><textarea value={reply} onChange={(e)=> setReply(e.target.value)}></textarea><button className="boxes" onClick={()=> {handleEdit(id,reply); setEdit(false)}}>Update</button></div> :<h2>{data_comment.content}</h2>}
                 </div>
             </div>
         </section>
         {clicked? 
-        <div className="answerbox">
+        <div className="new_comment">
             <img className="usersimg" alt="img" src={user.image.png}></img>
             <textarea value={reply} onChange={(e)=> setReply(e.target.value)}></textarea>
-            <div className="options">
-                <button className="boxes" onClick={()=> {handleReply(id,reply); setClicked(false); setReply("")}}>Reply</button>
-            </div>
+            <button className="boxes" onClick={()=> {handleReply(id,reply); setClicked(false); setReply("")}}>Reply</button>
         </div>:""}
         <div className="reply_comment">
             {data_comment.replies.map((replie,index)=><Reply key={index} id={replie.id} info={replie} current={user} deleteComment={deleteComment} handleReply={handleReply} parentId={id} handleEdit={handleEdit} handleLikeDislike={handleLikeDislike}/>)}
