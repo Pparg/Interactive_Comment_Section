@@ -6,7 +6,7 @@ body{
     justify-content: center;
     min-height: 100vh;
     max-width: 100vw;
-    background-color:hsl(228, 33%, 97%);
+    background-color:red;
     font-family: 'Rubik', sans-serif;
     margin: 0;
     padding: 0;
