@@ -8,9 +8,9 @@ export function CommentSection( ) {
   let [data, setData] = useState(file);
   let [newComment, setNewComment]= useState("");
   let [newId, setNewId] = useState(5)
-  let handleNewComment= ()=>{
-    if(newComment!==""){
-      let adding = {"id": newId, "content" : newComment, "score":0, "user" : data.currentUser, replies : []}
+  let handleNewComment= (content)=>{
+    if(content!=="" ){
+      let adding = {"id": newId, "content" : content, createdAt: "Now", "score":0, "user" : data.currentUser, replies : []}
       setData({
         ...data,
         comments :[...data.comments, adding]
@@ -19,9 +19,7 @@ export function CommentSection( ) {
     }
   }
   let handleReply= (id,newcontent)=>{
-    // need to make changes with the id
     if(newcontent!== ""){
-      console.log("hello")
       let adding = {
         id: newId,
         content: newcontent,
@@ -30,8 +28,8 @@ export function CommentSection( ) {
         replyingTo : data.comments[id-1].user.username,
         user : data.currentUser
       }
-      let updatedComment = data.comments.map((item, index)=>{
-        if(index === id-1){
+      let updatedComment = data.comments.map((item)=>{
+        if(item.id === id){
           let updated = item
           updated.replies = [...item.replies, adding]
           return updated
@@ -66,15 +64,96 @@ export function CommentSection( ) {
         comments : deletepart
       })
     }
-    
+  }
+  let handleEdit = (id, content, reply= false)=>{
+    if(!reply){
+      let updatedComment = data.comments.map((item)=>{
+        if(item.id === id){
+          return {...item, content : content}
+        }
+        else return item
+      })
+      setData({
+        ...data,
+        comments: updatedComment
+      })
+    }
+    else{
+      let updatedComment = data.comments.map((item)=>{
+        if(item.replies.filter((item)=> item.id === id) !== []){
+          let update = item.replies.map((arr)=>{
+            if(arr.id === id){
+              return {...arr, content: content}
+            }
+            else return arr
+          })
+          return {...item, replies: update}
+        }
+        else{
+          return item
+        }
+      })
+      setData({
+        ...data,
+        comments : updatedComment
+      })
+    }
+  }
+  let handleLikeDislike = (id, like_dislike, reply = false)=>{
+    if(like_dislike){
+      let updatedComment = data.comments.map((item)=>{
+        if(reply){
+          let updateReplyScore = item.replies.map((item=> {
+            if(item.id=== id){
+              let newScore = item.score +1
+              return {...item, score: newScore}
+            }
+            return item
+          }))
+          return {...item, replies: updateReplyScore}
+        }
+        else if(item.id === id){
+          let newScore = item.score +1
+          return {...item , score : newScore}
+        }
+        else return item
+      })
+      setData({
+        ...data,
+        comments : updatedComment,
+      })
+    }
+    else{
+      let updatedComment = data.comments.map((item)=>{
+        if(reply){
+          let updateReplyScore = item.replies.map((item=> {
+            if(item.id=== id && item.score >0){
+              let newScore = item.score -1
+              return {...item, score: newScore}
+            }
+            return item
+          }))
+          return {...item, replies: updateReplyScore}
+        }
+        if(item.id === id && item.score >0){
+          let newScore = item.score -1
+          return {...item , score : newScore}
+        }
+        else return item
+      })
+      setData({
+        ...data,
+        comments : updatedComment,
+      })
+    }
   }
   return (
   <div className='main_container'>
-    {data.comments.map((obj,index)=> <Comment key={obj.id} id={obj.id} data_comment={obj} user={data.currentUser} handleReply={handleReply} deleteComment={deleteComment} />)}
+    {data.comments.map((obj,index)=> <Comment key={obj.id} id={obj.id} data_comment={obj} user={data.currentUser} handleReply={handleReply} deleteComment={deleteComment} handleEdit={handleEdit} handleLikeDislike={handleLikeDislike}/>)}
     <div className='new_comment'>
       <img className='usersimg' alt="img" src={file.currentUser.image.png}></img>
       <textarea value={newComment} onChange={(e)=> setNewComment(e.target.value)} placeholder="Add a comment.."></textarea>
-      <button className='boxes' onClick={handleNewComment}>Send</button>
+      <button className='boxes' onClick={()=>handleNewComment(newComment)}>Send</button>
     </div>
   </div>)
   

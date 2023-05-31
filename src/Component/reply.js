@@ -1,16 +1,16 @@
 import React from "react";
 import { useState } from "react";
 
-export function Reply({info, current, deleteComment,id, handleReply,parentId}) {
+export function Reply({info, current, deleteComment,id, handleReply,parentId, handleEdit, handleLikeDislike}) {
     let [clicked,setClicked] = useState(false);
     let [edit, setEdit] = useState(false)
     let [ReplyTo, setReplyTo] = useState("");
     return(<>
         <section className="reply_container">
             <div className="like_dislike">
-                <button><i className="fa-solid fa-plus"></i></button>
+                <button onClick={()=> handleLikeDislike(id, true, true)}><i className="fa-solid fa-plus"></i></button>
                 <h3>{info.score}</h3>
-                <button><i className="fa-solid fa-minus"></i></button>
+                <button onClick={()=> handleLikeDislike(id, false, true)}><i className="fa-solid fa-minus"></i></button>
             </div>
             <div className="replyinfo_main_container">
                 <div className="comment_header">
@@ -31,7 +31,7 @@ export function Reply({info, current, deleteComment,id, handleReply,parentId}) {
                     </div>    
                 </div>
                 <div className="comment_section">
-                    {edit? <div className="update"><textarea value={ReplyTo} onChange={(e)=> setReplyTo(e.target.value)} ></textarea><button>Update</button></div>: <h2><span>@{info.replyingTo}</span> {info.content}</h2>}
+                    {edit? <div className="update"><textarea value={ReplyTo} onChange={(e)=> setReplyTo(e.target.value)}></textarea><button onClick={()=>{handleEdit(id, ReplyTo, true); setEdit(false)}}>Update</button></div>: <h2><span>@{info.replyingTo}</span> {info.content}</h2>}
                 </div>  
             </div>
         </section>
