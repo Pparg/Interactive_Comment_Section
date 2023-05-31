@@ -184,6 +184,12 @@ span{
         flex-direction: column-reverse;
         padding: 1rem;
     }
+    .comment_header{
+        justify-content: space-evenly;
+    }
+    .current_option button, .reply_box{
+        font-size: 0.8rem;
+    }
     .like_dislike{
         display: flex;
         flex-direction : row;
