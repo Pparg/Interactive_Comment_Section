@@ -6,17 +6,27 @@ body{
     justify-content: center;
     min-height: 100vh;
     max-width: 100vw;
-    background-color:red;
+    background-color:hsl(228, 33%, 97%);
     font-family: 'Rubik', sans-serif;
     margin: 0;
     padding: 0;
 }
+body:has(.confirmation_message){
+    background-color: hsl(211, 10%, 45%);
+}
+.main_container:has(.confirmation_message) {
+    background-color: hsl(211, 10%, 45%);
+}
+.main_container:has(.confirmation_message) .comment_container, .main_container:has(.confirmation_message) .reply_container{
+    background-color: hsl(223, 19%, 93%);
+}
 .main_container{
     max-width: 60vw;
     min-height: 60vh;
-}
-.new_comment{
-    background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 h2,p{
     color:hsl(211, 10%, 45%);
@@ -37,6 +47,41 @@ span{
 .username{
     color: black
 }
+.confirmation_message{
+    width: 25%;
+    border-radius: 1rem;
+    position: fixed;
+    top: 20%;
+    padding: 1.5rem;
+    opacity: 100%;
+    background-color: hsl(0, 0%, 100%);
+    box-shadow: 0 0 100vh rgba(0,0,0,0.60), 0 45px 26px rgba(0,0,0,0.14);
+}
+.options{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.options button{
+    border: 1px solid ;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    font-size: 1rem;
+    padding: 0.5rem;
+    color: white;
+}
+
+.options button:first-of-type{
+    background-color: grey;
+}
+.options button:nth-of-type(2){
+    background-color:hsl(358, 79%, 66%) ;
+}
+.options button:hover{
+    opacity: 50%;
+}
+
+
 /* Comment Container*/
 .comment_container{
     display: flex;
@@ -94,12 +139,14 @@ span{
     background-color: hsl(0, 0%, 100%);
     border-radius: 0.5rem;
     padding: 1rem;
+    width: 90%;
 }
 .new_comment textarea{
-    max-width: 80%;
-    width: 80%;
     min-height: 4rem ;
     border-radius: 8px;
+    min-width: 70%;
+    max-width: 80%;
+
 }
 
 /* Reply.js*/
@@ -170,12 +217,18 @@ span{
 }
 
 @media (width<900px) {
+    .confirmation_message{
+        width: 40%;
+    }
     .main_container{
         max-width: 80vw;
     }
 }
 
 @media (width<650px) {
+    .confirmation_message{
+        width: 50%;
+    }
     .main_container{
         max-width: 90vw;
     }

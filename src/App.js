@@ -8,6 +8,11 @@ export function CommentSection( ) {
   let [data, setData] = useState(file);
   let [newComment, setNewComment]= useState("");
   let [newId, setNewId] = useState(5)
+  let [erase ,setErase] = useState(true)
+  let confirmation = ()=>{
+    setErase(true)
+
+  }
   let handleNewComment= (content)=>{
     if(content!=="" ){
       let adding = {"id": newId, "content" : content, createdAt: "Now", "score":0, "user" : data.currentUser, replies : []}
@@ -46,6 +51,7 @@ export function CommentSection( ) {
   }
   let deleteComment = (id, reply= false )=>{
     //for the reply.js
+
     if(reply){
       let deletepart = data.comments.map((obj)=> {
         let filterArr = obj.replies.filter((arr)=> arr.id !== id)
@@ -150,6 +156,15 @@ export function CommentSection( ) {
   return (
   <div className='main_container'>
     {data.comments.map((obj,index)=> <Comment key={obj.id} id={obj.id} data_comment={obj} user={data.currentUser} handleReply={handleReply} deleteComment={deleteComment} handleEdit={handleEdit} handleLikeDislike={handleLikeDislike}/>)}
+    {erase && <div className='confirmation_message'>
+      <h1>Delete Comment</h1>
+      <p>Are you sure you want to delete this comment? This will remove the comment and can't be undone</p>
+      <div className='options'>
+        <button className='NO' onClick={()=> setErase(false)}>NO, CANCEL</button>
+        <button className='YES' onClick={()=> deleteComment("")}>YES, DELETE</button>
+      </div>
+      
+    </div>}
     <div className='new_comment'>
       <img className='usersimg' alt="img" src={file.currentUser.image.png}></img>
       <textarea value={newComment} onChange={(e)=> setNewComment(e.target.value)} placeholder="Add a comment.."></textarea>
