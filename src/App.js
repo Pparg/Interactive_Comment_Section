@@ -9,10 +9,6 @@ export function CommentSection( ) {
   let [newComment, setNewComment]= useState("");
   let [newId, setNewId] = useState(5)
   let [erase ,setErase] = useState(true)
-  let confirmation = ()=>{
-    setErase(true)
-
-  }
   let handleNewComment= (content)=>{
     if(content!=="" ){
       let adding = {"id": newId, "content" : content, createdAt: "Now", "score":0, "user" : data.currentUser, replies : []}
@@ -51,7 +47,6 @@ export function CommentSection( ) {
   }
   let deleteComment = (id, reply= false )=>{
     //for the reply.js
-
     if(reply){
       let deletepart = data.comments.map((obj)=> {
         let filterArr = obj.replies.filter((arr)=> arr.id !== id)
